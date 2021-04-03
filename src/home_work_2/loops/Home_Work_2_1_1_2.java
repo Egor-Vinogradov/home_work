@@ -8,22 +8,24 @@ public class Home_Work_2_1_1_2 {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            System.out.print("Введите целое положительное число: ");
-            int number = scanner.nextInt();
+            System.out.print("Введите целое число: ");
+            long number = scanner.nextLong();
             System.out.println(recursionCondition(number) + " = " + recursionResult(number));
         } catch (InputMismatchException e) {
             System.out.println("Вы ввели некорректные данные!");
         }
+
+        scanner.close();
     }
 
-    public static String recursionCondition(int n) {
+    public static String recursionCondition(long n) {
         if (n == 1) {
             return "1";
         }
         return recursionCondition(n - 1) + " * " + n;
     }
 
-    public static int recursionResult(int n) {
+    public static long recursionResult(long n) {
         if (n == 1) {
             return n;
         }

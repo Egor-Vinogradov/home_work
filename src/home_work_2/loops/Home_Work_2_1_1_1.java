@@ -8,15 +8,16 @@ public class Home_Work_2_1_1_1 {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            System.out.print("Введите целое положительное число: ");
-            int number = scanner.nextInt();
+            System.out.print("Введите целое число: ");
+            long number = scanner.nextLong();
             loopsResult(number);
         } catch (InputMismatchException e) {
             System.out.println("Вы ввели некорректные данные!");
         }
+        scanner.close();
     }
 
-    public static void loopsResult(int n) {
+    public static void loopsResult(long n) {
         int result = 1;
         for (int i = 1; i <= n; i++) {
             if (i != n) {
