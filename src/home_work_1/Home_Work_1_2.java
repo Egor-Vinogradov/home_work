@@ -1,6 +1,6 @@
 package home_work_1;
 
-public class Home_work_1_2 {
+public class Home_Work_1_2 {
 
     public static void main(String[] args) {
         // 5 + 2 / 8

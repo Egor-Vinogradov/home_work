@@ -2,7 +2,7 @@ package home_work_1;
 
 import java.util.Scanner;
 
-public class Home_work_1_4 {
+public class Home_Work_1_4 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("У Вас рабочий день? (true, false): ");

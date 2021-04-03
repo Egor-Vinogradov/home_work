@@ -1,6 +1,6 @@
 package home_work_1;
 
-public class Home_work_1_1 {
+public class Home_Work_1_1 {
 
     public static byte a = 42;
     public static byte b = 15;
