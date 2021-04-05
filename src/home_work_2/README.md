@@ -4,3 +4,5 @@ loops.Home_Work_2_1_2 - Задание 1.2
 loops.Home_Work_2_1_3 - Задание 1.3
 loops.Home_Work_2_1_4 - Задание 1.4*
 loops.Home_Work_2_1_5 - Задание 1.5 Таблица умножения
+
+utils.ArraysUtils - Задание 2.1 - 2.2
