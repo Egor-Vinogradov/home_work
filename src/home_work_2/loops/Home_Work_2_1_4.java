@@ -1,29 +1,26 @@
 package home_work_2.loops;
 
-import java.util.Scanner;
+import home_work_2.utils.ValueFromConsole;
 
 import static java.lang.Math.multiplyExact;
 
 public class Home_Work_2_1_4 {
     public static void main(String[] args){
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите целое число: ");
-        String number = scanner.next();
         long a = 1;
-        int b = 0;
+        long b;
 
-        try {
-            b = Integer.parseInt(number);
-        } catch (NumberFormatException e) {
-            System.out.println("Вы ввели некорректные данные!");
-        }
+        System.out.print("Введите целое число: ");
+        b= ValueFromConsole.longFromConsole();
 
         multiplicationValue(a, b);
-
-        scanner.close();
     }
 
-    private static void multiplicationValue(long a, int b) {
+    /**
+     * Функция умножает число long = 1 на введенное число до переполнения. Выводит результат до и после переполнения
+     * @param a входной параметр типа long
+     * @param b входной параметр типа long
+     */
+    private static void multiplicationValue(long a, long b) {
         long result = 1;
         try {
             for (int i = 0;; i++) {

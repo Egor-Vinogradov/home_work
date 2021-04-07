@@ -1,43 +1,36 @@
 package home_work_2.loops;
 
+import home_work_2.utils.ValueFromConsole;
+
 import java.text.DecimalFormat;
-import java.util.Scanner;
 
 public class Home_Work_2_1_3 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        double number = 0;
-        int power = 0;
+        double number;
+        long power;
 
         // считываем число
         System.out.print("Введите число: ");
-        String value = scanner.next();
-        try {
-            number = Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            System.out.println("Вы ввели некорректные данные!");
-            return;
-        }
+        number = ValueFromConsole.doubleFromConsole();
 
         // считываем степень
         System.out.print("Введите степень: ");
-        String valuePower = scanner.next();
-        try {
-            power = Integer.parseInt(valuePower);
-            if (power <= 0) {
-                System.out.println("Значение должно быть больше и не равно 0!");
-                return;
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Вы ввели некорректные данные!");
+        long powerConsole = ValueFromConsole.longFromConsoleWithVerificationPositive();
+        if (powerConsole != 0) {
+            power = powerConsole;
+        } else {
+            return;
         }
 
         numberExponentiation(number, power);
-
-        scanner.close();
     }
 
-    public static void numberExponentiation(double a, int b) {
+    /**
+     * Функция возводит в степень и выводит результат в формате по условию задача
+     * @param a входной параметр возводимого числа. Тип double, может быть отрицательное
+     * @param b входной параметр степени. Тип long, может быть только целое и положительное
+     */
+    public static void numberExponentiation(double a, long b) {
         // https://javarush.ru/groups/posts/2828-kak-vihpolnitjh-vozvedenie-v-stepenjh-v-java
         // 7 вариантов возведения
         double result = 1;
