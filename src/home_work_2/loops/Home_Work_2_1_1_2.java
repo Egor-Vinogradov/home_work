@@ -2,9 +2,13 @@ package home_work_2.loops;
 
 import home_work_2.utils.ValueFromConsole;
 
+import java.util.Scanner;
+
 public class Home_Work_2_1_1_2 {
     public static void main(String[] args) {
-        long number = ValueFromConsole.longFromConsole();
+        Scanner scanner = new Scanner(System.in);
+
+        long number = ValueFromConsole.longFromConsole(scanner.next());
         System.out.println(recursionCondition(number) + " = " + recursionResult(number));
     }
 

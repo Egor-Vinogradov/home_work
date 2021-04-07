@@ -12,8 +12,8 @@ public class ValueFromConsole {
      * Функция получает значение из консоли, проверяет и возвращает полученное значение типа long
      * @return возвращает значение типа long. В случае не выполнения условия возвращает 0
      */
-    public static long longFromConsole(){
-        Scanner scanner = new Scanner(System.in);
+    public static long longFromConsole(String str){
+        Scanner scanner = new Scanner(str);
         String string = scanner.next();
         long result = 0;
         try {
@@ -30,8 +30,8 @@ public class ValueFromConsole {
      * Делает дополнительную проверку на целостность значения
      * @return возвращает значение типа long. В случае не выполнения условия возвращает 0
      */
-    public static long longFromConsoleWithVerification() {
-        Scanner scanner = new Scanner(System.in);
+    public static long longFromConsoleWithVerification(String str) {
+        Scanner scanner = new Scanner(str);
         String string = scanner.next();
         scanner.close();
 
@@ -56,8 +56,8 @@ public class ValueFromConsole {
      * Делает дополнительную проверку. Значение должно быть целое и положительное
      * @return возвращает значение типа long. В случае не выполнения условия возвращает 0
      */
-    public static long longFromConsoleWithVerificationPositive() {
-        Scanner scanner = new Scanner(System.in);
+    public static long longFromConsoleWithVerificationPositive(String str) {
+        Scanner scanner = new Scanner(str);
         String string = scanner.next();
         scanner.close();
 
@@ -83,10 +83,10 @@ public class ValueFromConsole {
 
     /**
      * Функция получает значение из консоли, проверяет и возвращает полученное значение типа double
-     * @return возвращает значение типа long. В случае не выполнения условия возвращает 0
+     * @return возвращает значение типа long.
      */
-    public static double doubleFromConsole(){
-        Scanner scanner = new Scanner(System.in);
+    public static double doubleFromConsole(String str){
+        Scanner scanner = new Scanner(str);
         String string = scanner.next();
         double result = 0;
         try {
@@ -95,6 +95,25 @@ public class ValueFromConsole {
             System.out.println("Вы ввели некорректные данные!");
         }
         scanner.close();
+        return result;
+    }
+
+    /**
+     * Функция получает значение из консоли, проверяет и возвращает полученное значение типа int
+     * @return возвращает значение типа long.
+     */
+    public static int intFromConsole(String str) {
+        Scanner scanner = new Scanner(str);
+
+        String string = scanner.next();
+        scanner.close();
+
+        int result = 0;
+        try {
+            result = Integer.parseInt(string);
+        } catch (NumberFormatException e) {
+            System.out.println("Вы ввели некорректные данные!");
+        }
         return result;
     }
 }

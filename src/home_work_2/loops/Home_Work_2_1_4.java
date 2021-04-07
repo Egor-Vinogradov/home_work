@@ -2,15 +2,18 @@ package home_work_2.loops;
 
 import home_work_2.utils.ValueFromConsole;
 
+import java.util.Scanner;
+
 import static java.lang.Math.multiplyExact;
 
 public class Home_Work_2_1_4 {
     public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
         long a = 1;
         long b;
 
         System.out.print("Введите целое число: ");
-        b= ValueFromConsole.longFromConsole();
+        b = ValueFromConsole.longFromConsole(scanner.next());
 
         multiplicationValue(a, b);
     }

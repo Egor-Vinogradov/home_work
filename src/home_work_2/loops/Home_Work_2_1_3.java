@@ -3,19 +3,21 @@ package home_work_2.loops;
 import home_work_2.utils.ValueFromConsole;
 
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Home_Work_2_1_3 {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         double number;
         long power;
 
         // считываем число
         System.out.print("Введите число: ");
-        number = ValueFromConsole.doubleFromConsole();
+        number = ValueFromConsole.doubleFromConsole(scanner.next());
 
         // считываем степень
         System.out.print("Введите степень: ");
-        long powerConsole = ValueFromConsole.longFromConsoleWithVerificationPositive();
+        long powerConsole = ValueFromConsole.longFromConsoleWithVerificationPositive(scanner.next());
         if (powerConsole != 0) {
             power = powerConsole;
         } else {

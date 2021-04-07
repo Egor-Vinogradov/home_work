@@ -2,11 +2,13 @@ package home_work_2.loops;
 
 import home_work_2.utils.ValueFromConsole;
 import java.text.DecimalFormat;
+import java.util.Scanner;
 
 public class Home_Work_2_1_2 {
     public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Введите целое число: ");
-        loopsResult(createArrayFromNumber(ValueFromConsole.longFromConsoleWithVerification()));
+        loopsResult(createArrayFromNumber(ValueFromConsole.longFromConsoleWithVerification(scanner.next())));
     }
 
     /**

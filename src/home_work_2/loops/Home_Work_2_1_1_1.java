@@ -2,10 +2,13 @@ package home_work_2.loops;
 
 import home_work_2.utils.ValueFromConsole;
 
+import java.util.Scanner;
+
 public class Home_Work_2_1_1_1 {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Введите целое число: ");
-        loopsResult(ValueFromConsole.longFromConsole());
+        loopsResult(ValueFromConsole.longFromConsole(scanner.next()));
     }
 
     /**
