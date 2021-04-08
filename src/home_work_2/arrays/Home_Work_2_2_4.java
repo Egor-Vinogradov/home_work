@@ -1,6 +1,7 @@
 package home_work_2.arrays;
 
 import home_work_2.utils.ArraysUtils;
+import home_work_2.utils.SortsUtils;
 import home_work_2.utils.ValueFromConsole;
 
 import java.util.Arrays;
@@ -16,21 +17,20 @@ public class Home_Work_2_2_4 {
         System.out.print("Введите предел числа: ");
         int maxValueExclusion = ValueFromConsole.intFromConsole(scanner.next());
 
-        int[] array = ArraysUtils.arrayRandom(size, maxValueExclusion);
-        System.out.println(Arrays.toString(array));
+        int[] arr = ArraysUtils.arrayRandom(size, maxValueExclusion);
+        System.out.println(Arrays.toString(arr));
 
         // Задача 2.4.1 - Сумма четных положительных элементов массива
-        sumEvenPositiveNumbers(array);
+        sumEvenPositiveNumbers(arr);
 
         // Задача 2.4.2 - Максимальный из элементов массива с четными индексами
-        maxEvenIndex(array);
+        maxEvenIndex(arr);
 
         // Задача 2.4.3 - Элементы массива, которые меньше среднего арифметического
-        lessArithmeticMean(array);
+        lessArithmeticMean(arr);
 
         // Задача 2.4.4 - Найти два наименьших (минимальных) элемента массива
-        int[] arrNew = array;
-        minArrayElement(arrNew);
+        minArrayElement(arr);
         // !!!!!!!! дальше во всех методах будет срабатывать сортировка !!!!!!!!!!!!!!!
 
         // Задача 2.4.5 - Сжать массив, удалив элементы, принадлежащие интервалу
@@ -38,8 +38,24 @@ public class Home_Work_2_2_4 {
         int loverValue = ValueFromConsole.intFromConsole(scanner.next());
         System.out.print("Введите верхнюю границу удаляемого интервала: ");
         int upperValue = ValueFromConsole.intFromConsole(scanner.next());
-        compressedArray(array, loverValue, upperValue);
+        compressedArray(arr, loverValue, upperValue);
+        // !!!!!!!! дальше во всех методах будет срабатывать сжатый массив !!!!!!!!!!!!!!!
 
+        // Задача 2.4.6 - Сумма цифр массива
+        sumDigitsArray(arr);
+
+    }
+
+    private static void sumDigitsArray(int[] arr) {
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int num = arr[i];
+            while (num > 0) {
+                sum += num % 10;
+                num /= 10;
+            }
+        }
+        System.out.println(sum);
     }
 
     private static void compressedArray(int[] arr, int a, int b) {
@@ -72,7 +88,7 @@ public class Home_Work_2_2_4 {
 
     private static void minArrayElement(int[] arr) {
         // используем сортировку и выводим 2 первых элемента
-        int[] sortArr = ArraysUtils.sortArray(arr);
+        int[] sortArr = SortsUtils.sortArray(arr);
         for (int i = 0; i < 2; i++) {
             System.out.print(sortArr[i] + " ");
         }
@@ -103,7 +119,7 @@ public class Home_Work_2_2_4 {
             if (arr[i] > arr[max]) {
                 max = i;
             }
-        System.out.println(arr[max]);;
+        System.out.println(arr[max]);
     }
 
     private static void sumEvenPositiveNumbers(int[] arr) {
