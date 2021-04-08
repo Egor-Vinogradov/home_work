@@ -5,22 +5,21 @@ import java.util.Scanner;
 
 public class ArraysUtils {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         //Задача 2.1.2
         System.out.println(Arrays.toString(arrayRandom(5, 100)));
 
         // Задача 2.2.1
         // Элементы по порядку в консоль
-        itemsInOrderToTheConsole(arrayFromConsole(scanner.next()));
+        itemsInOrderToTheConsole(arrayFromConsole());
 
         // Задача 2.2.2
         // Каждый второй элемент массива в консоль
-        secondItemToConsole(arrayFromConsole(scanner.next()));
+        secondItemToConsole(arrayFromConsole());
 
         // Задача 2.2.3
         // Все элементы массива в консоль в обратном порядке
-        reversItemToConsole(arrayFromConsole(scanner.next()));
+        reversItemToConsole(arrayFromConsole());
 
     }
 
@@ -151,6 +150,7 @@ public class ArraysUtils {
         for (int arr: arrayFromConsole) {
             System.out.print(arr + " ");
         }
+        System.out.println();
     }
 
     /**
@@ -158,28 +158,22 @@ public class ArraysUtils {
      * Задаем размер массива и элементы
      * @return возвращает массив
      */
-    public static int[] arrayFromConsole(String str) {
-        Scanner scaner = new Scanner(str);
-
+    public static int[] arrayFromConsole() {
         System.out.print("Введите размер массива: ");
         int sizeArray = 0;
         try {
-            sizeArray = scaner.nextInt();
+            sizeArray = new Scanner(System.in).nextInt();
         } catch (Exception e) {
             System.out.println("Вы ввели некорректные данные!");
-            arrayFromConsole(str);
         }
-
         int elementArray = 0;
         int [] container = new int[sizeArray];// инициализация массива
-
         for (int i = 0; i < sizeArray; i++) {
             System.out.print("Введите элемент массива: ");
             try {
-                elementArray = scaner.nextInt();
+                elementArray = new Scanner(System.in).nextInt();
             } catch (Exception e) {
                 System.out.println("Вы ввели некорректные данные!");
-                arrayFromConsole(str);
             }
             container[i] = elementArray;
         }
@@ -200,23 +194,4 @@ public class ArraysUtils {
         return container;
     }
 
-    /**
-     * Пузырьковая сортировка
-     * @param arr входной параметр массив типа ште
-     * @return возвращает отсортированный массив
-     */
-    public static int[] sortArray(int[] arr){
-        for (int i = 0; i < arr.length - 1; i++) {
-            int minIndex = i;
-            for (int j = i +1; j < arr.length; j++) {
-                if (arr[j] < arr[minIndex]){
-                    minIndex = j;
-                }
-            }
-            int tmp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = tmp;
-        }
-        return arr;
-    }
 }

@@ -3,11 +3,6 @@ package home_work_2.utils;
 import java.util.Scanner;
 
 public class ValueFromConsole {
-    public static void main(String[] args) {
-//        System.out.println(longFromConsole());
-//        System.out.println(longFromConsoleWithVerification());
-    }
-
     /**
      * Функция получает значение из консоли, проверяет и возвращает полученное значение типа long
      * @return возвращает значение типа long. В случае не выполнения условия возвращает 0
