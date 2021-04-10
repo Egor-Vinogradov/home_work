@@ -1,7 +1,6 @@
 package home_work_3.runners;
 
 import home_work_3.calcs.simple.CalculatorWithMathCopy;
-import home_work_3.calcs.simple.CalculatorWithOperator;
 
 public class CalculatorWithMathCopyMain {
     public static void main(String[] args) {
