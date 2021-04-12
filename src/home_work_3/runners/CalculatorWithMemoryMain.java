@@ -1,9 +1,9 @@
 package home_work_3.runners;
 
-import home_work_3.calcs.additional.CalculatorWithCounterAutoCompositeInterface;
+import home_work_3.calcs.additional.CalculatorWithMemory;
 import home_work_3.calcs.simple.CalculatorWithOperator;
 
-public class CalculatorWithCounterAutoCompositeInterfaceMain {
+public class CalculatorWithMemoryMain {
     public static void main(String[] args) {
         /*
         4.1 + 15 * 7 + (28 / 5) ^ 2
@@ -17,7 +17,7 @@ public class CalculatorWithCounterAutoCompositeInterfaceMain {
 
         // для примера был взят CalculatorWithOperator
         // если создать тип через интерфейс, тогда нужно добавлять команду для рассчета операций в интерфейс
-        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithOperator());
+        CalculatorWithMemory calc = new CalculatorWithMemory(new CalculatorWithOperator());
 //        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithMathCopy());
 //        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithMathExtends());
 
@@ -25,6 +25,12 @@ public class CalculatorWithCounterAutoCompositeInterfaceMain {
                 calc.pow(calc.division(d, e), g));
 
         System.out.println("4.1 + 15 * 7 + (28 / 5) ^ 2 = " + rezult);
+
+        // запись в память последней операции
+        calc.setMemoryLastOperation();
+        // получение значения из памяти
+        System.out.println("Значение в памяти: " + calc.getMemory());
+
         System.out.println("Количество операций: " + calc.getCountOperation());
 
     }
