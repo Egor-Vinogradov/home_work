@@ -24,15 +24,15 @@ public class CalculatorWithCounterAutoComposite {
     }
 
     public CalculatorWithCounterAutoComposite(CalculatorWithOperator calculator) {
-        this.calculator = new CalculatorWithOperator();
+        this.calculator = calculator;
     }
 
     public CalculatorWithCounterAutoComposite(CalculatorWithMathCopy calculator) {
-        this.calculator = new CalculatorWithMathCopy();
+        this.calculator = calculator;
     }
 
     public CalculatorWithCounterAutoComposite(CalculatorWithMathExtends calculator) {
-        this.calculator = new CalculatorWithMathExtends();
+        this.calculator = calculator;
     }
      /** Сложение чисел a и b
      * Определяем тип вызываемого калькулятора и делегируем метод. Используется приведение к нужному типу
