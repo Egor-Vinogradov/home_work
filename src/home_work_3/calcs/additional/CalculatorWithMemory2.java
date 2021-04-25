@@ -19,11 +19,13 @@ public class CalculatorWithMemory2 implements ICalculator {
     }
 
     /**
-     * Функция возвращает значение "памяти"
+     * Функция возвращает значение "памяти" и обнуляет память
      * @return возвращаемое значение
      */
     public double getMemory() {
-        return memory;
+        double memory1 = this.memory;
+        this.memory = 0;
+        return memory1;
     }
 
     /**

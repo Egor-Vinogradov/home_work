@@ -25,8 +25,6 @@ public class CalculatorWithMemoryMain {
         // для примера был взят CalculatorWithOperator
         // если создать тип через интерфейс, тогда нужно добавлять команду для рассчета операций в интерфейс
         CalculatorWithMemory calc = new CalculatorWithMemory(new CalculatorWithOperator());
-//        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithMathCopy());
-//        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithMathExtends());
 
         double rezult = calc.addition(calc.addition(a, calc.multiplication(b, c)),
                 calc.pow(calc.division(d, e), g));
@@ -52,8 +50,6 @@ public class CalculatorWithMemoryMain {
         // для примера был взят CalculatorWithOperator
         // если создать тип через интерфейс, тогда нужно добавлять команду для рассчета операций в интерфейс
         CalculatorWithMemory2 calc = new CalculatorWithMemory2(new CalculatorWithOperator());
-//        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithMathCopy());
-//        CalculatorWithCounterAutoCompositeInterface calc = new CalculatorWithCounterAutoCompositeInterface(new CalculatorWithMathExtends());
 
         double rezult = calc.addition(calc.addition(a, calc.multiplication(b, c)),
                 calc.pow(calc.division(d, e), g));
