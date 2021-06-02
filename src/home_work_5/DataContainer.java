@@ -118,7 +118,7 @@ public class DataContainer<T> {
      * Сортирует массив при помощи переданного компоратора
      * @param comparator компоратор для сортировки. Может быть null
      */
-    public void sort(Comparator<T> comparator) {
+    public void sort(Comparator<? super T> comparator) {
         // проверка на наличие компоратора
         // если компоратор не передан
         if (comparator == null) {
@@ -176,5 +176,39 @@ public class DataContainer<T> {
         }
 
         return "data = " + Arrays.toString(copyArray);
+    }
+
+    /**
+     * Статический метод сортирует переданный в него объект типа DataContainer по
+     * переданному в него Comparator
+     * @param container объект типа DataContainer
+     * @param comparator Comparator для сортировки
+     */
+    public static void sort(DataContainer<?> container, Comparator<Object> comparator) {
+        // получаем размер переданного массива и создаем новый массив из переданного объекта
+        int size = container.getItems().length;
+        Object[] newArray = container.getItems();
+
+        // проверка на наличие компоратора
+        // если компоратор не передан
+        if (comparator == null) {
+            for (int i = 0; i < size; i++) {
+                // проверка на null в элементах массива
+                // применяется, если в массиве среди элементов есть null
+                if (newArray[i] == null) {
+                    continue;
+                }
+                // сортировка при помощи Comparable
+                for (int j = i; j > 0 && ((Comparable) newArray[j - 1]).compareTo(newArray[j]) > 0; j--) {
+                    swap(newArray, j, j - 1);
+                }
+            }
+            // если компоратор передан
+        } else {
+            for (int i = 0; i < size; i++) {
+                for (int j = i; j > size && comparator.compare(newArray[j - 1], newArray[j]) > 0; j--)
+                    swap(newArray, j, j - 1);
+            }
+        }
     }
 }
