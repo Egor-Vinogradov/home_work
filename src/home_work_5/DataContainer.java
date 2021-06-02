@@ -1,8 +1,9 @@
 package home_work_5;
 
 import java.util.*;
+import java.util.function.Consumer;
 
-public class DataContainer<T> {
+public class DataContainer<T> implements Iterable<T> {
     private T[] data;
 
     /**
@@ -210,5 +211,30 @@ public class DataContainer<T> {
                     swap(newArray, j, j - 1);
             }
         }
+    }
+//    public static void sort(DataContainer<? extends Comparable> container) {}
+
+    /**
+     * Реализация интерфейса Iterable
+     * @return возвращает Iterator
+     */
+    @Override
+    public Iterator<T> iterator() {
+        Iterator<T> iterator = new Iterator<T>() {
+
+            int currentIndex = 0;
+            int size = data.length;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < size && data[currentIndex] != null;
+            }
+
+            @Override
+            public T next() {
+                return data[currentIndex++];
+            }
+        };
+        return iterator;
     }
 }
