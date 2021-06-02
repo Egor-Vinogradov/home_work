@@ -28,22 +28,25 @@ public class DataContainer<T> implements Iterable<T> {
      * @return возвращает -1 если передан null, либо возвращает номер индекса массива
      */
     public int add(T item) {
-        int index = data.length;
+        int index = this.data.length;
 
         // проверка на null
-        if (item == null) return -1;
+        if (item == null) {
+            return -1;
+        }
 
         // цикл ищет первый null и вставляет значение
         for (int i = 0; i < index; i++) {
-            if (data[i] == null) {
+            if (this.data[i] == null) {
                 this.data[i] = item;
                 return i;
             }
         }
 
         // проверка на переполнение и вставка элемента
-        this.data = Arrays.copyOf(data, index + 1);
-        data[index] = item;
+        this.data = Arrays.copyOf(this.data, index + 1);
+        this.data[index] = item;
+
         return index;
     }
 
@@ -53,8 +56,10 @@ public class DataContainer<T> implements Iterable<T> {
      * @return элемент
      */
     public T get(int index) {
-        if (index > data.length - 1) return null;
-        return data[index];
+        if (index < this.data.length - 1 && index > -1) {
+            return this.data[index];
+        }
+        return null;
     }
 
     /**
@@ -72,15 +77,15 @@ public class DataContainer<T> implements Iterable<T> {
      */
     public boolean delete(int index) {
         // возвращает false если передан индекс не в диапазоне массива
-        if (index > data.length - 1 || index < 0) return false;
+        if (index > this.data.length - 1 || index < 0) return false;
 
         // уменьшает длину массива на 1 и возвращает true
-        T[] copyArray = (T[]) new Object[data.length - 1];
+        T[] copyArray = (T[]) new Object[this.data.length - 1];
         int indexArray = 0;
-        data[index] = null;
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] != null) {
-                copyArray[indexArray] = data[i];
+        this.data[index] = null;
+        for (int i = 0; i < this.data.length; i++) {
+            if (this.data[i] != null) {
+                copyArray[indexArray] = this.data[i];
                 indexArray++;
             }
         }
@@ -94,23 +99,23 @@ public class DataContainer<T> implements Iterable<T> {
      * @return возвращает значение true либо false, в зависимости от результата
      */
     public boolean delete(T item) {
-        T[] copyArray = (T[]) new Object[data.length - 1];
+        T[] copyArray = (T[]) new Object[this.data.length - 1];
         int indexArray = 0;
         // проходим по массиву, если находим, тогда первую часть пишем в новый массив
-        for (int i = 0; i < data.length; i++) {
-            if (item.equals(data[i])) {
+        for (int i = 0; i < this.data.length; i++) {
+            if (item.equals(this.data[i])) {
                 break;
             }
             // проверяем на переполнение. если переполнен, тогда возвращаем false, т.к. элемент не найден
-            if (indexArray >= data.length - 1) return false;
+            if (indexArray >= this.data.length - 1) return false;
 
-            copyArray[indexArray] = data[i];
+            copyArray[indexArray] = this.data[i];
             indexArray++;
         }
 
         // добавляем вторую часть массива, после удаленного элемента
-        System.arraycopy(data, indexArray + 1, copyArray, indexArray,
-                data.length - indexArray - 1);
+        System.arraycopy(this.data, indexArray + 1, copyArray, indexArray,
+                this.data.length - indexArray - 1);
         this.data = copyArray;
         return true;
     }
@@ -123,22 +128,27 @@ public class DataContainer<T> implements Iterable<T> {
         // проверка на наличие компоратора
         // если компоратор не передан
         if (comparator == null) {
-            for (int i = 0; i < data.length; i++) {
-                // проверка на null в элементах массива
-                // применяется, если в массиве среди элементов есть null
-                if (data[i] == null) {
-                    continue;
+            // пока такой вариант при переданом null
+            try {
+                for (int i = 0; i < this.data.length; i++) {
+                    // проверка на null в элементах массива
+                    // применяется, если в массиве среди элементов есть null
+                    if (this.data[i] == null) {
+                        continue;
+                    }
+                    // сортировка при помощи Comparable
+                    for (int j = i; j > 0 && ((Comparable) this.data[j - 1]).compareTo(this.data[j]) > 0; j--) {
+                        swap(this.data, j, j - 1);
+                    }
                 }
-                // сортировка при помощи Comparable
-                for (int j = i; j > 0 && ((Comparable) data[j - 1]).compareTo(data[j]) > 0; j--) {
-                    swap(data, j, j - 1);
-                }
+            } catch (Exception e) {
+                System.out.println("Значение массива не является значением примитивного типа!");
             }
-        // если компоратор передан
+            // если компоратор передан
         } else {
-            for (int i = 0; i < data.length; i++) {
-                for (int j = i; j > data.length && comparator.compare(data[j - 1], data[j]) > 0; j--)
-                    swap(data, j, j - 1);
+            for (int i = 0; i < this.data.length; i++) {
+                for (int j = i; j > this.data.length && comparator.compare(this.data[j - 1], this.data[j]) > 0; j--)
+                    swap(this.data, j, j - 1);
             }
         }
     }
@@ -212,7 +222,25 @@ public class DataContainer<T> implements Iterable<T> {
             }
         }
     }
-//    public static void sort(DataContainer<? extends Comparable> container) {}
+
+    /**
+     * Реализация взята из урока
+     * @param container массив, насследуемый от компоратора
+     * @param <Z> тип компоратора
+     */
+    public static <Z extends Comparable> void sort(DataContainer<Z> container) {
+        if(container != null) {
+            for (int i = 0; i < container.data.length - 1; i++) {
+                int minIndex = i;
+                for (int j = i + 1; j < container.data.length; j++) {
+                    if(container.data[j].compareTo(container.data[minIndex]) < 0) {
+                        minIndex = j;
+                    }
+                    swap(container.data, j, j - 1);
+                }
+            }
+        }
+    }
 
     /**
      * Реализация интерфейса Iterable

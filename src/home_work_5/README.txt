@@ -8,6 +8,6 @@
 Задание 8: Добавлен boolean delete(T item)
 Задание 9: Добавлен public void sort(Comparator<? super T> comparator)
 Задание 10: Переопределен метод toString()
-Задание 11:
+Задание 11: Добавлен public static <Z extends Comparable> void sort(DataContainer<Z> container)
 Задание 12: Добавлен СТАТИЧЕСКИЙ метод void sort(DataContainer<?> container, Comparator<Object> comparator)
 Задание 13: Реализован в DataContainer интерфейс Iterable

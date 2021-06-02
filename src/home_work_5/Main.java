@@ -23,7 +23,7 @@ public class Main {
 
         System.out.println("_________сортировка______________");
 
-        container.sort(null);
+//        container.sort(null);
 
         for (String s : container) {
             System.out.println(s);
