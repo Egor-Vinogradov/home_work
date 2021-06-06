@@ -1,8 +1,5 @@
 package home_work_6;
 
-import java.text.DecimalFormat;
-import java.util.*;
-
 public class Person {
     private String nick;
     private String password;
@@ -38,14 +35,6 @@ public class Person {
 
     public String getPassword() {
         return password;
-    }
-
-    @Override
-    public String toString() {
-        return "Person {" +
-                "nick = '" + nick + '\'' +
-                ", password = '" + password + '\'' +
-                '}';
     }
 
     public static int getMinValuePassword() {

@@ -1,10 +1,5 @@
 package home_work_6;
 
-import home_work_6.comparators.AnimalAgeAndNickComparator;
-
-import java.text.DecimalFormat;
-import java.util.*;
-
 public class Animal {
     private int age;
     private String nick;
@@ -39,14 +34,6 @@ public class Animal {
 
     public String getNick() {
         return nick;
-    }
-
-    @Override
-    public String toString() {
-        return "Animal{" +
-                "age=" + age +
-                ", nick='" + nick + '\'' +
-                '}';
     }
 
     public static int getMinValueAge() {
