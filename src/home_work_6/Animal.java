@@ -4,9 +4,10 @@ public class Animal {
     private int age;
     private String nick;
 
-    private static final int MIN_VALUE_AGE = 1;
-    private static final int MAX_VALUE_AGE = 15;
-    private static final int MAX_VALUE_NICK = 100;
+    public static final int MIN_VALUE_AGE = 1;
+    public static final int MAX_VALUE_AGE = 15;
+    public static final int MAX_VALUE_NICK = 100;
+    public static final int MIN_VALUE_NICK = 1;
 
     public Animal() {
     }
@@ -34,17 +35,5 @@ public class Animal {
 
     public String getNick() {
         return nick;
-    }
-
-    public static int getMinValueAge() {
-        return MIN_VALUE_AGE;
-    }
-
-    public static int getMaxValueAge() {
-        return MAX_VALUE_AGE;
-    }
-
-    public static int getMaxValueNick() {
-        return MAX_VALUE_NICK;
     }
 }

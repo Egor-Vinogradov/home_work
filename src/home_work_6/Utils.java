@@ -1,5 +1,6 @@
 package home_work_6;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Utils {
@@ -37,26 +38,20 @@ public class Utils {
     }
 
     /**
-     * Сортировка List при помощи Collections.sort
-     * @param list входящий List
-     * @param comparator входящий Comparator
-     * @return возвращает отсортированный List
+     * Метод для печати в консоли результата из Map
+     * @param map колекция значений для печати: название операции, количество милисекунд
+     * @param nameClass название класса для печати
+     * @param amountOfElements количество элементов для печати
      */
-    public static List sortListJDK(List list, Comparator comparator) {
-        Collections.sort(list, comparator);
-        return list;
-    }
+    public static void print(Map<String, Long> map, String nameClass,int amountOfElements) {
+        String formatAmountOfElements = new DecimalFormat("#,###").format(amountOfElements);
 
-    /**
-     * Сортировка Set
-     * Входящий параметр типа Set приводим к TreeSet, который по сути своей является отсортированным
-     * @param set входящий Set
-     * @param comparator входящий Comparator
-     * @return возвращает отсортированный Set
-     */
-    public static Set sortSetJDK(Set set, Comparator comparator) {
-        TreeSet setSort = new TreeSet<>(set);
-        return setSort;
+        System.out.println("Для класса: " + nameClass + ". Количество элементов: " +
+                formatAmountOfElements);
+        for (Map.Entry<String, Long> stringLongEntry : map.entrySet()) {
+            System.out.println("Операция: " + stringLongEntry.getKey() + ". Заняла: " +
+                    stringLongEntry.getValue() + " мс.");
+        }
     }
 
     /**
@@ -64,8 +59,8 @@ public class Utils {
      * @param list входной параметр типа List
      * @return возвращает количество милисекунд типа long
      */
-    public static long measurementTimeIteratorList(List list) {
-        Iterator iterator = list.iterator();
+    public static long measurementTimeIteratorList(List<?> list) {
+        Iterator<?> iterator = list.iterator();
         long time1 = System.currentTimeMillis();
         while (iterator.hasNext()) {
             iterator.next();
@@ -79,8 +74,8 @@ public class Utils {
      * @param set входной параметр типа Set
      * @return возвращает количество милисекунд типа long
      */
-    public static long measurementTimeIteratorSet(Set set) {
-        Iterator iterator = set.iterator();
+    public static long measurementTimeIteratorSet(Set<?> set) {
+        Iterator<?> iterator = set.iterator();
         long time1 = System.currentTimeMillis();
         while (iterator.hasNext()) {
             iterator.next();
@@ -91,10 +86,11 @@ public class Utils {
 
     /**
      * Метод возвращает количество милисекунд для выполнения итерации с помощью fori для Collection
+     * Для прохода выбран путь: перевод коллекции в массив и заполнение массива данными коллекции
      * @param collection входной параметр типа Collection
      * @return возвращает количество милисекунд типа long
      */
-    public static long measurementTimeNotIterator(Collection collection) {
+    public static long measurementTimeNotIterator(Collection<?> collection) {
         Object[] array = collection.toArray();
         long time1 = System.currentTimeMillis();
         for (int i = 0; i < collection.size(); i++) {
@@ -109,15 +105,15 @@ public class Utils {
      * @param list входной параметр типа List
      * @return возвращает количество милисекунд типа long
      */
-    public static long measurementTimeIteratorRemoveList(List list) {
+    public static long measurementTimeIteratorRemoveList(List<?> list) {
         /*
         Проверка на тип List, чтобы сделать копию нужного типа
          */
-        List listNew;
+        List<?> listNew;
         if (list instanceof ArrayList) {
-            listNew = new ArrayList(list);
+            listNew = new ArrayList<>(list);
         } else if (list instanceof LinkedList) {
-            listNew = new LinkedList(list);
+            listNew = new LinkedList<>(list);
         } else {
             return 0;
         }
@@ -138,21 +134,21 @@ public class Utils {
      * @param comparator входной параметр типа Comparator для TreeSet. Необходим для копирования колекции
      * @return возвращает количество милисекунд типа long
      */
-    public static long measurementTimeIteratorRemoveSet(Set set, Comparator comparator) {
+    public static long measurementTimeIteratorRemoveSet(Set<?> set, Comparator<?> comparator) {
         /*
         Проверка на тип Set, чтобы сделать копию нужного типа
          */
         Set setNew;
         if (set instanceof HashSet) {
-            setNew = new HashSet(set);
+            setNew = new HashSet<>(set);
         } else if (set instanceof TreeSet) {
-            setNew = new TreeSet(comparator);
+            setNew = new TreeSet<>(comparator);
             setNew.addAll(set);
         } else {
             return 0;
         }
 
-        Iterator iterator = setNew.iterator();
+        Iterator<?> iterator = setNew.iterator();
         long time1 = System.currentTimeMillis();
         while (iterator.hasNext()) {
             iterator.next();
@@ -168,7 +164,7 @@ public class Utils {
      * @param collection входной параметр типа Collection
      * @return возвращает количество милисекунд типа long
      */
-    public static long measurementTimeRemove(Collection collection) {
+    public static long measurementTimeRemove(Collection<?> collection) {
 
         long time1 = System.currentTimeMillis();
         collection.clear();
