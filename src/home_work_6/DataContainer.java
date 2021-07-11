@@ -1,33 +1,30 @@
 package home_work_6;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class DataContainer<T> implements IDataContainer<T> {
     /**
      * Переменные для разных коллекций
      */
-    private List listLinkedList;
-    private List listArrayList;
-    private Set setHashSet;
-    private Set setTreeSet;
+    private List<T> listLinkedList;
+    private List<T> listArrayList;
+    private Set<T> setHashSet;
+    private Set<T> setTreeSet;
 
     /**
      * Переменные входящих параметров. Инициализируются конструктором
      */
-    private T data;
     private int amountOfElements;
     private Comparator comparator;
+    private Supplier<T> supplier;
 
-    /**
-     * Конструктор для создания экземпляра класса
-     * @param data входной параметр для определения типа класса, который передан
-     * @param amountOfElements количество элементов
-     * @param comparator компаратор для сортировки и для TreeSet
-     */
-    public DataContainer(T data, int amountOfElements, Comparator comparator) {
-        this.data = data;
+
+    public DataContainer(Supplier<T> supplier, int amountOfElements, Comparator comparator) {
+//        this.data = data;
         this.amountOfElements = amountOfElements;
         this.comparator = comparator;
+        this.supplier = supplier;
     }
 
     /**
@@ -35,7 +32,7 @@ public class DataContainer<T> implements IDataContainer<T> {
      */
     @Override
     public void start() {
-        Utils.print(measurementTimeWorkWithCollections(), this.data.getClass().getSimpleName(),
+        Utils.print(measurementTimeWorkWithCollections(), this.supplier.getClass().getSimpleName(),
                 this.amountOfElements);
     }
 
@@ -46,27 +43,12 @@ public class DataContainer<T> implements IDataContainer<T> {
      */
     @Override
     public List<T> fillingLinkedList(int amountOfElements) {
-        if (data instanceof Person) {
-            List<Person> listLinkedList = new LinkedList<>();
-            for (int i = 0; i < amountOfElements; i++) {
-                listLinkedList.add(i, new Person(Utils.randomString(Person.MIN_VALUE_NICK,
-                        Person.MAX_VALUE_NICK), Utils.randomString(Person.MIN_VALUE_PASSWORD,
-                                Person.MAX_VALUE_PASSWORD)));
-            }
-            this.listLinkedList = listLinkedList;
-            return this.listLinkedList;
-        } else if (data instanceof Animal) {
-            List<Animal> listLinkedList = new LinkedList<>();
-            for (int i = 0; i < amountOfElements; i++) {
-                listLinkedList.add(i, new Animal(Utils.randomInt(Animal.MIN_VALUE_AGE,
-                        Animal.MAX_VALUE_AGE), Utils.randomString(Animal.MIN_VALUE_NICK,
-                        Animal.MAX_VALUE_NICK)));
-            }
-            this.listLinkedList = listLinkedList;
-            return this.listLinkedList;
-        } else {
-            return this.listLinkedList = new LinkedList();
+        List<T> listLinkedList = new LinkedList<>();
+        for (int i = 0; i < amountOfElements; i++) {
+            listLinkedList.add(i, supplier.get());
         }
+        this.listLinkedList = listLinkedList;
+        return this.listLinkedList;
     }
 
     /**
@@ -76,27 +58,12 @@ public class DataContainer<T> implements IDataContainer<T> {
      */
     @Override
     public List<T> fillingArrayList(int amountOfElements) {
-        if (data instanceof Person) {
-            List<Person> listArrayList = new ArrayList<>();
-            for (int i = 0; i < amountOfElements; i++) {
-                listArrayList.add(i, new Person(Utils.randomString(Person.MIN_VALUE_NICK,
-                        Person.MAX_VALUE_NICK), Utils.randomString(Person.MIN_VALUE_PASSWORD,
-                                Person.MAX_VALUE_PASSWORD)));
-            }
-            this.listArrayList = listArrayList;
-            return this.listArrayList;
-        } else if (data instanceof Animal) {
-            List<Animal> listArrayList = new ArrayList<>();
-            for (int i = 0; i < amountOfElements; i++) {
-                listArrayList.add(i, new Animal(Utils.randomInt(Animal.MIN_VALUE_AGE,
-                        Animal.MAX_VALUE_AGE), Utils.randomString(Animal.MIN_VALUE_NICK,
-                        Animal.MAX_VALUE_NICK)));
-            }
-            this.listArrayList = listArrayList;
-            return this.listArrayList;
-        } else {
-            return this.listArrayList = new ArrayList();
+        List<T> listArrayList = new ArrayList<>();
+        for (int i = 0; i < amountOfElements; i++) {
+            listArrayList.add(i, supplier.get());
         }
+        this.listArrayList = listArrayList;
+        return this.listArrayList;
     }
 
     /**
@@ -106,25 +73,12 @@ public class DataContainer<T> implements IDataContainer<T> {
      */
     @Override
     public Set<T> fillingHashSet(int amountOfElements) {
-        if (data instanceof Person) {
-            Set<Person> set = new HashSet<>();
-            for (int i = 0; i < amountOfElements; i++) {
-                set.add(new Person(Utils.randomString(Person.MIN_VALUE_NICK, Person.MIN_VALUE_NICK),
-                        Utils.randomString(Person.MIN_VALUE_PASSWORD, Person.MAX_VALUE_PASSWORD)));
-            }
-            this.setHashSet = set;
-            return this.setHashSet;
-        } else if (data instanceof Animal) {
-            Set<Animal> set = new HashSet<>();
-            for (int i = 0; i < amountOfElements; i++) {
-                set.add(new Animal(Utils.randomInt(Animal.MIN_VALUE_AGE, Animal.MAX_VALUE_AGE),
-                        Utils.randomString(Animal.MIN_VALUE_NICK, Animal.MAX_VALUE_NICK)));
-            }
-            this.setHashSet = set;
-            return this.setHashSet;
-        } else {
-            return this.setHashSet = new HashSet();
+        Set<T> set = new HashSet<>();
+        for (int i = 0; i < amountOfElements; i++) {
+            set.add(supplier.get());
         }
+        this.setHashSet = set;
+        return this.setHashSet;
     }
 
     /**
@@ -135,27 +89,12 @@ public class DataContainer<T> implements IDataContainer<T> {
      */
     @Override
     public Set<T> fillingTreeSet(int amountOfElements, Comparator comparator) {
-        if (data instanceof Person) {
-            // при инициализации этого Set обязательно передаем компаратор
-            Set<Person> set = new TreeSet<Person>(comparator);
-            for (int i = 0; i < amountOfElements; i++) {
-                set.add(new Person(Utils.randomString(Person.MIN_VALUE_NICK, Person.MAX_VALUE_NICK),
-                        Utils.randomString(Person.MAX_VALUE_PASSWORD, Person.MAX_VALUE_PASSWORD)));
-            }
-            this.setTreeSet = set;
-            return this.setTreeSet;
-        } else if (data instanceof Animal) {
-            // при инициализации этого Set обязательно передаем компаратор
-            Set<Animal> set = new TreeSet<Animal>(comparator);
-            for (int i = 0; i < amountOfElements; i++) {
-                set.add(new Animal(Utils.randomInt(Animal.MIN_VALUE_AGE, Animal.MAX_VALUE_AGE),
-                        Utils.randomString(Animal.MIN_VALUE_NICK, Animal.MAX_VALUE_NICK)));
-            }
-            this.setTreeSet = set;
-            return this.setTreeSet;
-        } else {
-            return this.setTreeSet = new TreeSet(comparator);
+        Set<T> set = new TreeSet<T>(comparator);
+        for (int i = 0; i < amountOfElements; i++) {
+            set.add(supplier.get());
         }
+        this.setTreeSet = set;
+        return this.setTreeSet;
     }
 
     /**
