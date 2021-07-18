@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataContainer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HomeWork_1</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">DataContainer.java</span></div><h1>DataContainer.java</h1><pre class="source lang-java linenums">import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+
+public class DataContainer&lt;T&gt; implements Iterable&lt;T&gt; {
+    private T[] data;
+
+    /**
+     * default конструктор
+     * Создает новый массив с 10 элементами
+     */
+<span class="nc" id="L12">    public DataContainer() {</span>
+<span class="nc" id="L13">        this.data = (T[]) new Object[10];</span>
+<span class="nc" id="L14">    }</span>
+
+    /**
+     * конструктор принимает массив и передает его в массив класса
+     * @param data принимаемый массив
+     */
+<span class="nc" id="L20">    public DataContainer(T[] data) {</span>
+<span class="nc" id="L21">        this.data = data;</span>
+<span class="nc" id="L22">    }</span>
+
+    /**
+     * метод принимает значение и передает его в массив класса
+     * @param item переданный элемент
+     * @return возвращает -1 если передан null, либо возвращает номер индекса массива
+     */
+    public int add(T item) {
+<span class="nc" id="L30">        int index = this.data.length;</span>
+
+        // проверка на null
+<span class="nc bnc" id="L33" title="All 2 branches missed.">        if (item == null) {</span>
+<span class="nc" id="L34">            return -1;</span>
+        }
+
+        // цикл ищет первый null и вставляет значение
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        for (int i = 0; i &lt; index; i++) {</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if (this.data[i] == null) {</span>
+<span class="nc" id="L40">                this.data[i] = item;</span>
+<span class="nc" id="L41">                return i;</span>
+            }
+        }
+
+        // проверка на переполнение и вставка элемента
+<span class="nc" id="L46">        this.data = Arrays.copyOf(this.data, index + 1);</span>
+<span class="nc" id="L47">        this.data[index] = item;</span>
+
+<span class="nc" id="L49">        return index;</span>
+    }
+
+    /**
+     * возвращает элемент массива по переданому индексу
+     * @param index индекс
+     * @return элемент
+     */
+    public T get(int index) {
+<span class="nc bnc" id="L58" title="All 4 branches missed.">        if (index &lt; this.data.length - 1 &amp;&amp; index &gt; -1) {</span>
+<span class="nc" id="L59">            return this.data[index];</span>
+        }
+<span class="nc" id="L61">        return null;</span>
+    }
+
+    /**
+     * Возвращает весь массив
+     * @return массив
+     */
+    public T[] getItems() {
+<span class="nc" id="L69">        return this.data;</span>
+    }
+
+    /**
+     * Удаляет элемент из массива по переданному индексу. Уменльшает длину массива на один элемент
+     * @param index индекс массива
+     * @return возвращает значение true либо false, в зависимости от результата
+     */
+    public boolean delete(int index) {
+        // возвращает false если передан индекс не в диапазоне массива
+<span class="nc bnc" id="L79" title="All 4 branches missed.">        if (index &gt; this.data.length - 1 || index &lt; 0) return false;</span>
+
+        // уменьшает длину массива на 1 и возвращает true
+<span class="nc" id="L82">        T[] copyArray = (T[]) new Object[this.data.length - 1];</span>
+<span class="nc" id="L83">        int indexArray = 0;</span>
+<span class="nc" id="L84">        this.data[index] = null;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (int i = 0; i &lt; this.data.length; i++) {</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (this.data[i] != null) {</span>
+<span class="nc" id="L87">                copyArray[indexArray] = this.data[i];</span>
+<span class="nc" id="L88">                indexArray++;</span>
+            }
+        }
+<span class="nc" id="L91">        this.data = copyArray;</span>
+<span class="nc" id="L92">        return true;</span>
+    }
+
+    /**
+     * Удаляет переданный элемент из массива. Уменьшает длину массива на один элемент
+     * @param item элемент массива
+     * @return возвращает значение true либо false, в зависимости от результата
+     */
+    public boolean delete(T item) {
+<span class="nc" id="L101">        T[] copyArray = (T[]) new Object[this.data.length - 1];</span>
+<span class="nc" id="L102">        int indexArray = 0;</span>
+        // проходим по массиву, если находим, тогда первую часть пишем в новый массив
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        for (int i = 0; i &lt; this.data.length; i++) {</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">            if (item.equals(this.data[i])) {</span>
+<span class="nc" id="L106">                break;</span>
+            }
+            // проверяем на переполнение. если переполнен, тогда возвращаем false, т.к. элемент не найден
+<span class="nc bnc" id="L109" title="All 2 branches missed.">            if (indexArray &gt;= this.data.length - 1) return false;</span>
+
+<span class="nc" id="L111">            copyArray[indexArray] = this.data[i];</span>
+<span class="nc" id="L112">            indexArray++;</span>
+        }
+
+        // добавляем вторую часть массива, после удаленного элемента
+<span class="nc" id="L116">        System.arraycopy(this.data, indexArray + 1, copyArray, indexArray,</span>
+                this.data.length - indexArray - 1);
+<span class="nc" id="L118">        this.data = copyArray;</span>
+<span class="nc" id="L119">        return true;</span>
+    }
+
+    /**
+     * Сортирует массив при помощи переданного компоратора
+     * @param comparator компоратор для сортировки. Может быть null
+     */
+    public void sort(Comparator&lt;? super T&gt; comparator) {
+        // проверка на наличие компоратора
+        // если компоратор не передан
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (comparator == null) {</span>
+            // пока такой вариант при переданом null
+            try {
+<span class="nc bnc" id="L132" title="All 2 branches missed.">                for (int i = 0; i &lt; this.data.length; i++) {</span>
+                    // проверка на null в элементах массива
+                    // применяется, если в массиве среди элементов есть null
+<span class="nc bnc" id="L135" title="All 2 branches missed.">                    if (this.data[i] == null) {</span>
+<span class="nc" id="L136">                        continue;</span>
+                    }
+                    // сортировка при помощи Comparable
+<span class="nc bnc" id="L139" title="All 4 branches missed.">                    for (int j = i; j &gt; 0 &amp;&amp; ((Comparable) this.data[j - 1]).compareTo(this.data[j]) &gt; 0; j--) {</span>
+<span class="nc" id="L140">                        swap(this.data, j, j - 1);</span>
+                    }
+                }
+<span class="nc" id="L143">            } catch (Exception e) {</span>
+<span class="nc" id="L144">                System.out.println(&quot;Значение массива не является значением примитивного типа!&quot;);</span>
+<span class="nc" id="L145">            }</span>
+            // если компоратор передан
+        } else {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            for (int i = 0; i &lt; this.data.length; i++) {</span>
+<span class="nc bnc" id="L149" title="All 4 branches missed.">                for (int j = i; j &gt; this.data.length &amp;&amp; comparator.compare(this.data[j - 1], this.data[j]) &gt; 0; j--)</span>
+<span class="nc" id="L150">                    swap(this.data, j, j - 1);</span>
+            }
+        }
+<span class="nc" id="L153">    }</span>
+
+    /**
+     * Метод для перестановки значений для сортировки
+     * @param x переданный массив
+     * @param a индекс первоначальный
+     * @param b индекс куда переставлять
+     */
+    private static void swap(Object[] x, int a, int b) {
+<span class="nc" id="L162">        Object t = x[a];</span>
+<span class="nc" id="L163">        x[a] = x[b];</span>
+<span class="nc" id="L164">        x[b] = t;</span>
+<span class="nc" id="L165">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L169">        int indexArray = 0;</span>
+
+        // проходим по массиву, считаем индексы без null
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        for (int i = 0; i &lt; data.length; i++) {</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (data[i] != null) indexArray++;</span>
+        }
+
+        // создаем новый массив
+<span class="nc" id="L177">        T[] copyArray = (T[]) new Object[indexArray];</span>
+
+        // пишем элементы не null в новый массив
+<span class="nc" id="L180">        indexArray = 0;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        for (int i = 0; i &lt; data.length; i++) {</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            if (data[i] != null) {</span>
+<span class="nc" id="L183">                copyArray[indexArray] = data[i];</span>
+<span class="nc" id="L184">                indexArray++;</span>
+            }
+        }
+
+<span class="nc" id="L188">        return &quot;data = &quot; + Arrays.toString(copyArray);</span>
+    }
+
+    /**
+     * Статический метод сортирует переданный в него объект типа DataContainer по
+     * переданному в него Comparator
+     * @param container объект типа DataContainer
+     * @param comparator Comparator для сортировки
+     */
+    public static void sort(DataContainer&lt;?&gt; container, Comparator&lt;Object&gt; comparator) {
+        // получаем размер переданного массива и создаем новый массив из переданного объекта
+<span class="nc" id="L199">        int size = container.getItems().length;</span>
+<span class="nc" id="L200">        Object[] newArray = container.getItems();</span>
+
+        // проверка на наличие компоратора
+        // если компоратор не передан
+<span class="nc bnc" id="L204" title="All 2 branches missed.">        if (comparator == null) {</span>
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            for (int i = 0; i &lt; size; i++) {</span>
+                // проверка на null в элементах массива
+                // применяется, если в массиве среди элементов есть null
+<span class="nc bnc" id="L208" title="All 2 branches missed.">                if (newArray[i] == null) {</span>
+<span class="nc" id="L209">                    continue;</span>
+                }
+                // сортировка при помощи Comparable
+<span class="nc bnc" id="L212" title="All 4 branches missed.">                for (int j = i; j &gt; 0 &amp;&amp; ((Comparable) newArray[j - 1]).compareTo(newArray[j]) &gt; 0; j--) {</span>
+<span class="nc" id="L213">                    swap(newArray, j, j - 1);</span>
+                }
+            }
+            // если компоратор передан
+        } else {
+<span class="nc bnc" id="L218" title="All 2 branches missed.">            for (int i = 0; i &lt; size; i++) {</span>
+<span class="nc bnc" id="L219" title="All 4 branches missed.">                for (int j = i; j &gt; size &amp;&amp; comparator.compare(newArray[j - 1], newArray[j]) &gt; 0; j--)</span>
+<span class="nc" id="L220">                    swap(newArray, j, j - 1);</span>
+            }
+        }
+<span class="nc" id="L223">    }</span>
+
+    /**
+     * Реализация взята из урока
+     * @param container массив, насследуемый от компоратора
+     * @param &lt;Z&gt; тип компоратора
+     */
+    public static &lt;Z extends Comparable&gt; void sort(DataContainer&lt;Z&gt; container) {
+<span class="nc bnc" id="L231" title="All 2 branches missed.">        if(container != null) {</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">            for (int i = 0; i &lt; container.data.length - 1; i++) {</span>
+<span class="nc" id="L233">                int minIndex = i;</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">                for (int j = i + 1; j &lt; container.data.length; j++) {</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">                    if(container.data[j].compareTo(container.data[minIndex]) &lt; 0) {</span>
+<span class="nc" id="L236">                        minIndex = j;</span>
+                    }
+<span class="nc" id="L238">                    swap(container.data, j, j - 1);</span>
+                }
+            }
+        }
+<span class="nc" id="L242">    }</span>
+
+    /**
+     * Реализация интерфейса Iterable
+     * @return возвращает Iterator
+     */
+    @Override
+    public Iterator&lt;T&gt; iterator() {
+<span class="nc" id="L250">        Iterator&lt;T&gt; iterator = new Iterator&lt;T&gt;() {</span>
+
+<span class="nc" id="L252">            int currentIndex = 0;</span>
+<span class="nc" id="L253">            int size = data.length;</span>
+
+            @Override
+            public boolean hasNext() {
+<span class="nc bnc" id="L257" title="All 4 branches missed.">                return currentIndex &lt; size &amp;&amp; data[currentIndex] != null;</span>
+            }
+
+            @Override
+            public T next() {
+<span class="nc" id="L262">                return data[currentIndex++];</span>
+            }
+        };
+<span class="nc" id="L265">        return iterator;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
