@@ -1,0 +1,52 @@
+@options
+@argfile
+-encoding
+'Cp1251'
+-protected
+-source
+'11'
+-sourcepath
+'C:/jd1/projects/HomeWork_2/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/jd1/projects/HomeWork_2/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'HomeWork_1 1.0-SNAPSHOT API'
+-linkoffline
+'https://docs.oracle.com/en/java/javase/11/docs/api' 'C:/jd1/projects/HomeWork_2/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'HomeWork_1 1.0-SNAPSHOT API'
+'C:/jd1/projects/HomeWork_2/src/main/java/Main.java'
+C:\jd1\projects\HomeWork_2\src\main\java\Main.java = 1626595422801
+C:\jd1\projects\HomeWork_2\src\main\java = 1626595422802
+C:\jd1\projects\HomeWork_2\target\site\apidocs\allclasses-index.html = 1626597509103
+C:\jd1\projects\HomeWork_2\target\site\apidocs\allclasses.html = 1626597509388
+C:\jd1\projects\HomeWork_2\target\site\apidocs\allpackages-index.html = 1626597509157
+C:\jd1\projects\HomeWork_2\target\site\apidocs\constant-values.html = 1626597508601
+C:\jd1\projects\HomeWork_2\target\site\apidocs\deprecated-list.html = 1626597509326
+C:\jd1\projects\HomeWork_2\target\site\apidocs\element-list = 1626597508356
+C:\jd1\projects\HomeWork_2\target\site\apidocs\help-doc.html = 1626597509450
+C:\jd1\projects\HomeWork_2\target\site\apidocs\index-all.html = 1626597509061
+C:\jd1\projects\HomeWork_2\target\site\apidocs\index.html = 1626597509423
+C:\jd1\projects\HomeWork_2\target\site\apidocs\Main.html = 1626597508347
+C:\jd1\projects\HomeWork_2\target\site\apidocs\member-search-index.js = 1626597509041
+C:\jd1\projects\HomeWork_2\target\site\apidocs\member-search-index.zip = 1626597509053
+C:\jd1\projects\HomeWork_2\target\site\apidocs\overview-tree.html = 1626597508832
+C:\jd1\projects\HomeWork_2\target\site\apidocs\package-search-index.js = 1626597508896
+C:\jd1\projects\HomeWork_2\target\site\apidocs\package-search-index.zip = 1626597508980
+C:\jd1\projects\HomeWork_2\target\site\apidocs\package-summary.html = 1626597508458
+C:\jd1\projects\HomeWork_2\target\site\apidocs\package-tree.html = 1626597508511
+C:\jd1\projects\HomeWork_2\target\site\apidocs\package-use.html = 1626597508778
+C:\jd1\projects\HomeWork_2\target\site\apidocs\script.js = 1626597509495
+C:\jd1\projects\HomeWork_2\target\site\apidocs\search.js = 1626597509544
+C:\jd1\projects\HomeWork_2\target\site\apidocs\stylesheet.css = 1626597509480
+C:\jd1\projects\HomeWork_2\target\site\apidocs\type-search-index.js = 1626597509003
+C:\jd1\projects\HomeWork_2\target\site\apidocs\type-search-index.zip = 1626597509021
